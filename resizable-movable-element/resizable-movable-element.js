@@ -52,9 +52,9 @@ ResizableElement = () => {
     };
 
     clicks = 0;
-    o = document.createElement("div");
+    o = document.createElement("div"); o.classList.add("resizable");
     // add stylesheet
-    o.innerHTML += '<style type="text/css">*{--circle-w: 4.1px;} .resizable { min-height: 20px; min-width: 10px; height: 250px; width: 455px; max-height: 100%; max-width: 100%; position: absolute; background-color: red; } .resizeable-borders { box-sizing: border-box; height: 30%; width: 80%; min-width: 20px; cursor: nw-resize; position: absolute; top: 10px; left: 10px; box-shadow: 0 0 0 1000px rgba(89, 104, 96, 0.281); } hr.left { height: 100%; position: absolute; width: 1px; left: 0px; cursor: ew-resize; } hr.right {  width: 1px; height: 100%; position: absolute; right: 0px; cursor: ew-resize; } hr.bottom { cursor: ns-resize; width: 100%; height: 1px; position: absolute; bottom: 0px; } hr.top { cursor: ns-resize; position: absolute; width: 100%; height: 1px; top: 0px; } hr.resizer { background-size: 10px 10px, 100% 10px; padding: 0px; margin: 0px; border: 0; background: rgb(46, 46, 46); } .circle { height: var(--circle-w); width: var(--circle-w); border-radius: 100%; border: 1px rgb(46, 46, 46) solid; background-color: white; z-index: 10; } .bc { cursor: ns-resize; bottom: 0px; left: 50%; margin-bottom: calc(var(--circle-w) / -2); position: absolute; } .tc { cursor: ns-resize; position: absolute; top: 0px; left: 50%; margin-top: calc(var(--circle-w) / -2); } .rc { position: absolute; right: 0px; top: 50%; cursor: ew-resize; margin-right: calc(var(--circle-w) / -2); } .lc { position: absolute; left: 0px; top: 50%; cursor: ew-resize; margin-left: calc(var(--circle-w) / -2); } .trc { position: absolute; margin: calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) 0px calc(var(--circle-w) / -2); right: 0px; top: 0px; cursor: nesw-resize; } .brc { position: absolute; margin: 0px calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) calc(var(--circle-w) / -2); right: 0px; bottom: 0; cursor: nwse-resize; } .tlc { position: absolute; margin: calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) 0px calc(var(--circle-w) / -2); left: 0px; top: 0; cursor: nwse-resize; } .blc { position: absolute; margin: 0px calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) calc(var(--circle-w) / -2); left: 0px; bottom: 0; cursor: nesw-resize; } </style>';
+    o.innerHTML += '<style type="text/css">*{--circle-w: 4.1px;} .resizable { min-height: 20px; min-width: 10px; height: 250px; width: 455px; max-height: 100%; max-width: 100%; position: absolute; } .resizeable-borders { box-sizing: border-box; height: 30%; width: 80%; min-width: 20px; cursor: nw-resize; position: absolute; top: 10px; left: 10px; box-shadow: 0 0 0 1000px rgba(89, 104, 96, 0.281); } hr.left { height: 100%; position: absolute; width: 1px; left: 0px; cursor: ew-resize; } hr.right {  width: 1px; height: 100%; position: absolute; right: 0px; cursor: ew-resize; } hr.bottom { cursor: ns-resize; width: 100%; height: 1px; position: absolute; bottom: 0px; } hr.top { cursor: ns-resize; position: absolute; width: 100%; height: 1px; top: 0px; } hr.resizer { background-size: 10px 10px, 100% 10px; padding: 0px; margin: 0px; border: 0; background: rgb(46, 46, 46); } .circle { height: var(--circle-w); width: var(--circle-w); border-radius: 100%; border: 1px rgb(46, 46, 46) solid; background-color: white; z-index: 10; } .bc { cursor: ns-resize; bottom: 0px; left: 50%; margin-bottom: calc(var(--circle-w) / -2); position: absolute; } .tc { cursor: ns-resize; position: absolute; top: 0px; left: 50%; margin-top: calc(var(--circle-w) / -2); } .rc { position: absolute; right: 0px; top: 50%; cursor: ew-resize; margin-right: calc(var(--circle-w) / -2); } .lc { position: absolute; left: 0px; top: 50%; cursor: ew-resize; margin-left: calc(var(--circle-w) / -2); } .trc { position: absolute; margin: calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) 0px calc(var(--circle-w) / -2); right: 0px; top: 0px; cursor: nesw-resize; } .brc { position: absolute; margin: 0px calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) calc(var(--circle-w) / -2); right: 0px; bottom: 0; cursor: nwse-resize; } .tlc { position: absolute; margin: calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) 0px calc(var(--circle-w) / -2); left: 0px; top: 0; cursor: nwse-resize; } .blc { position: absolute; margin: 0px calc(var(--circle-w) / -2) calc(var(--circle-w) / -2) calc(var(--circle-w) / -2); left: 0px; bottom: 0; cursor: nesw-resize; } </style>';
     o.style.minHeight = "20px";
     o.style.minWidth = "10px";
     o.style.height = "250px";
@@ -115,11 +115,17 @@ ResizableElement = () => {
         o.insertAdjacentElement("beforeend", e);
     }
     o.onclick = (ev) => {
-        var target = ev.target;
-        var p_el = target;
-        if (target.nodeName == "CANVAS" || target.classList.contains("resizer")) {
-            p_el = target.parentElement;
-        } var p_el_c = p_el.childNodes;
+        var p_el = findResizableElement(ev.target);
+
+        function findResizableElement(target) {
+            if (target.classList.contains("resizable")) {
+                return target;
+            } else {
+                return findResizableElement(target.parentElement)
+            }
+        }
+
+        var p_el_c = p_el.childNodes;
         clicks++;
         if (clicks <= 1) {
             showResizers();
@@ -256,3 +262,5 @@ ResizableElement = () => {
 
     return o;
 }
+
+

@@ -21,6 +21,10 @@
                 </span></ol>
             <h3>Results:</h3> <!-- insert image -->
             <img src="https://github.com/WanjohiGeorge/Vanilla-Javascript/blob/main/resizable-movable-element/resizable-movable-html-div.png" alt="Resible Movable HTML Div">
+            <h3>Features</h3>
+            <ul>           
+            
+            </ul>
         </div>
         <div id="ImageCropper">
             <hr>
