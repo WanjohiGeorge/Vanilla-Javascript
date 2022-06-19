@@ -23,7 +23,15 @@
             <img src="https://github.com/WanjohiGeorge/Vanilla-Javascript/blob/main/resizable-movable-element/resizable-movable-html-div.png" alt="Resible Movable HTML Div">
             <h3>Features</h3>
             <ul>           
-            
+                <li>Element can contain other elements.</li>
+                <li>You can drag the element on top of other elements</li>
+                <li>The element can be resized to fit in 8-cardinal points. (N, E, W, S, NE, NW, SW, SE). Hovering on the resizers shows the appropriate Cursor</li>
+            </ul>
+            <b>Applications</b>
+            <ul>
+                <li>In chart drawing applications</li>
+                <li>Online Image cropping application</li>
+                <li>...etc</li>
             </ul>
         </div>
         <div id="ImageCropper">
