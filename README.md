@@ -37,6 +37,7 @@
         <div id="ImageCropper">
             <hr>
             <li style="font-size:large">Image Cropping</li>
+            <video controls="true" src="https://github.com/WanjohiGeorge/Vanilla-Javascript/blob/main/image-cropper/croppper-in-use.mp4"></video>
         </div>
     </ol>
 </div>
