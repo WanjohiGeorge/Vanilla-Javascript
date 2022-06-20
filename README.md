@@ -27,7 +27,7 @@
                 <li>You can drag the element on top of other elements</li>
                 <li>The element can be resized to fit in 8-cardinal points. (N, E, W, S, NE, NW, SW, SE). Hovering on the resizers shows the appropriate Cursor</li>
             </ul>
-            <b>Applications</b>
+            <h3>Applications</h3>
             <ul>
                 <li>In chart drawing applications</li>
                 <li>Online Image cropping application</li>
